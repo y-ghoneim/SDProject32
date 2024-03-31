@@ -1,0 +1,41 @@
+Physiology:
+
+ID | Body Temp | Systolic BP | Diastolic | Heart rate | Muscle Mass | Agitation
+
+12-6 is one window, rest fall into the 12 window (you can use hourly for this)
+
+X group for training, Y group for testing (IDs cannot overlap) 
+
+Records per patient and per label (Agitation, Blood Pressure, etc.)
+
+Window for taking in the records (overlapping or non-overlapping) - look into the literature (continuous glucose monitoring transfer learning IEEE EMBS)
+
+Sleep:
+
+With the stages (awake, light, deep, rem) - towards validating sleep apnea - table of sleep stage measurements (waso) and find out how to calculate them 
+heart rate - check what summary metrics you can get (mean, sd, etc.), same for respiratory rate
+
+ID | WASO + Other | REM Latency | Snoring Count | Mean Heart Rate | Mean Resp Rate | Agitation
+
+For each night's sleep (or each hour) of each patient - start with each night then based on each hour
+
+ID | WASO | REM Latency | Snoring Count | Mean Heart Rate | Mean Resp Rate | Agitation
+
+} -> Agitation (1 label) -> different enough to predict else we need more info 
+
+Hypnogram -> Awake, Rem, Stage 1 - Light, 3 - Deep - plot this
+For each patient
+
+--Just in case--
+Hour before agitation as a label, everything else would be a pre-training (Self-Supervised model)
+
+Counts for each sleep state per patient (deep, light, ..)
+
+NOT IMPORTANT: Group patients into those who have the most agitation episodes(eg: >50% of the agitation counts go to certain patients then we can separate them)
+
+We need to check if every patient in physiology have a map to labels 
+
+We need to check the ideal window for prediction (5 minutes, 10 minutes for dementia patients? -> check the literature)
+
+Do we want to take overlapping windows or non-overlapping windows (12-1, 1-2 or 12-1, 12:30-1:30 and so on) - start with non-overlapping and take it from there?
+
