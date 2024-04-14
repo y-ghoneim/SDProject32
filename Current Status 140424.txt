@@ -1,0 +1,57 @@
+Sleep:
+
+926, 24 agitation and the rest non-agitated
+
+Preprocessing:
+
+We've assigned 2 types of windows: 
+	a. For night sleep (12pm) Everything from the night before (6pm - 12pm next day) gets put into this window
+	b. For afternoon sleep (6pm): anything between 12 and 6 (same day) gets put into this window
+
+Variables after preprocessing: 
+
+1. patient_id	
+2. window_start: Each of these windows are by date (eg: 29/06/2019 12:00)
+3. mean_HR: mean heart rate (everything in that window gets averaged)
+4. HR_var: heart rate variability	
+5. mean_RR: mean respiratory rate
+6. RR_var: resp rate variability	
+7. WASO: Wake after sleep onset	
+8. SOL: Sleep Onset Latency	
+9. TIB: Time in Bed	
+10. TST: Total Sleep Time	
+11. SE: Sleep Efficiency	
+12. snoring_counts
+13. agitation (target)
+
+We have only 24/926 agitation points and it's very heavily imbalanced. 
+
+---
+We first tried RF to see where it would go, but it's near 0% accuracy for agitation. The best results we've seen with handling this is oversampling with SMOTE, but with a specific way - we put 22 in the training then oversample this, then leave the other 2 in testing. So our models now have a 51 non/49 agitation training split (22 unique agitation cases), and 30 non-agitation/2 agitation in the testing split. 
+---
+
+Here's the RF results: 
+
+              precision    recall  f1-score   support
+No Agitation       0.97      0.93      0.95        30
+   Agitation       0.33      0.50      0.40         2
+
+    accuracy                           0.91        32
+   macro avg       0.65      0.72      0.67        32
+weighted avg       0.93      0.91      0.91        32
+
+---------------------
+
+Physiology Data:
+Currently 7278 rows, with 3270 instances of agitation. Problem is that we have too many NaNs:
+
+patient_id                     0
+Window                         0
+Body Temperature            1546
+Diastolic Blood Pressure    3426
+Heart Rate                  3426
+O/E - Muscle Mass           4918
+Systolic Blood Pressure     3426
+Agitation                      0
+
+We're thinking that since we've designed the windows as sliding we can just average the patient's nearby window data to handle NaNs. We wanted to check with you and see if that's a viable strategy before running and evaluating our models.
