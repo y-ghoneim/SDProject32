@@ -22,7 +22,7 @@ Variables after preprocessing:
 10. TST: Total Sleep Time	
 11. SE: Sleep Efficiency	
 12. snoring_counts
-13. agitation (target)
+13. agitation (target): gets mapped from physiology to this window
 
 We have only 24/926 agitation points and it's very heavily imbalanced. 
 
@@ -55,3 +55,4 @@ Systolic Blood Pressure     3426
 Agitation                      0
 
 We're thinking that since we've designed the windows as sliding we can just average the patient's nearby window data to handle NaNs. We wanted to check with you and see if that's a viable strategy before running and evaluating our models.
+
