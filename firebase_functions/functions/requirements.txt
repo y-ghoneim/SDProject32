@@ -1,0 +1,10 @@
+firebase_functions~=0.1.0
+firebase-admin>=5.0.0
+flask
+functions-framework
+google-cloud-firestore
+google-cloud-storage
+pandas
+joblib
+lightgbm
+numpy
