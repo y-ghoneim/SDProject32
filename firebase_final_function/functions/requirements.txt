@@ -1,0 +1,19 @@
+firebase_functions~=0.1.0
+# Data manipulation and mathematics
+numpy
+pandas
+
+# Machine learning and explanations
+joblib
+shap
+
+# Visualization libraries
+matplotlib
+seaborn
+
+# Google Cloud services
+google-cloud-firestore
+google-cloud-storage
+
+# Local testing of cloud functions
+functions-framework
